@@ -3,7 +3,7 @@ import { BmwCaseStudy } from "@/components/BmwCaseStudy";
 import { OrangeSkyCase } from "@/components/OrangeSkyCase";
 import { ProjectHeroIntro } from "@/components/ProjectHeroIntro";
 import { SiteWordmark } from "@/components/SiteWordmark";
-import { getProjectPage } from "@/lib/project-pages";
+import { getProjectPage, type ProjectStoryImage } from "@/lib/project-pages";
 import {
   resolveCaseStudyImage,
   resolveProjectImage,
@@ -168,8 +168,13 @@ export default async function ProjectPage({
             alt: `${page.title} ${IMAGE_ALT[key] ?? key}`,
           }))
           .filter(
-            (image): image is { key: string; src: string; alt: string } =>
-              Boolean(image.src),
+            (
+              image,
+            ): image is {
+              key: ProjectStoryImage;
+              src: string;
+              alt: string;
+            } => Boolean(image.src),
           );
         const layout =
           images.length > 1
